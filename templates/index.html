@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breast Cancer Classification</title>
+</head>
+<body>
+    <h1>Breast Cancer Classification</h1>
+    <form action="/predict" method="post">
+        Feature 1: <input type="text" name="feature1"><br>
+        Feature 2: <input type="text" name="feature2"><br>
+        <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+    
+    <style>
+       /* Global Styles */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    padding: 180px;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2em auto;
+    background: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Header */
+.container h1 {
+    font-size: 24px;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+/* Form Styling */
+form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 14px;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.2s ease-in-out;
+}
+
+form input[type="text"]:focus {
+    border: 1px solid #007BFF;
+    outline: none;
+}
+
+/* Button */
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 14px 20px;
+    margin: 15px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Result */
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 1em;
+    }
+}
+
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('form').submit(function(event) {
+            event.preventDefault();
+            $.post('/predict', $(this).serialize(), function(data) {
+                $('#result').html('Prediction: ' + data.prediction);
+            });
+        });
+    </script>
+</body>
+</html>
